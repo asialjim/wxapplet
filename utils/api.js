@@ -264,6 +264,9 @@ const restApi = {
 // 导出函数和REST API对象
 module.exports = {
   // 基础方法
+  userToken,
+  refreshUserToken,
+  header,
   request,
   get,
   post,
@@ -273,7 +276,4 @@ module.exports = {
   options,
   trace,
   connect,
-  
-  // 按类型分组的API
-  rest: restApi
 };
