@@ -7,21 +7,21 @@
 const configs = {
   // 开发环境
   develop: {
-    baseUrl: 'https://dev.api.asialjim.cn',
+    baseUrl: 'http://dev.gateway.api.asialjim.cn',
     apiPrefix: '/api',
     debug: true,
     xAppId: '335233980152156161',
   },
   // 测试环境
   trial: {
-    baseUrl: 'http://test.api.asialjim.cn',
+    baseUrl: 'http://test.gateway.api.asialjim.cn',
     apiPrefix: '/api',
     debug: true,
     xAppId: '335233980152156161',
   },
   // 生产环境
   release: {
-    baseUrl: 'http://gateway.api.asialjim.cn',
+    baseUrl: 'http://prod.gateway.api.asialjim.cn',
     apiPrefix: '/api',
     debug: false,
     xAppId: '335233980152156161',
