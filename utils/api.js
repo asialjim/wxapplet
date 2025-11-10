@@ -1,5 +1,5 @@
 // 引入依赖模块
-const { rest, open } = require('./url');
+const {  open } = require('./url');
 const { xAppId, xAppChl, xAppChlAppid, xAppChlAppType } = require('./env');
 
 function refreshUserToken(){
@@ -22,18 +22,28 @@ function userToken() {
 
   // 6 还获取不到用户令牌，执行登录功能并从后台应用中换取用户的 令牌
   wx.login({
-    success: (code)=>{
-      post(open('/user/auth/login'), { code: code.code }, {headers: header(null,true)})
-        .then((res) => {
-             if (res) {
-              wx.setStorageSync('x-user-token', res);
-            } else {
-              console.error('登录失败：未获取到有效的用户令牌');
-            }
-        }).catch((err) => {
-          console.error('登录请求失败:', err);
-        })
-    }, 
+    success:(code) => {
+      wx.request({
+        url: open('/user/auth/login'),
+        data: { code: code.code },
+        header: header(null, true),
+        method: 'POST',
+        success: (res) => {
+            // 6.4.1 调用 parse 函数解析返回结果作为用户令牌
+          const token = parse(res);
+          if (token) {
+            wx.setStorageSync('x-user-token', token);
+          } else {
+            console.error('登录失败：未获取到有效的用户令牌');
+          }
+        },
+        fail: (error) => {
+          console.error('登录请求失败:', error);
+        }
+      })
+
+    },
+
     fail: (err) => {
       throw new Error('登录失败：' + err.errMsg);
     }
