@@ -1,4 +1,5 @@
 // 引入依赖模块
+const { parse} = require('./response');
 const {  open } = require('./url');
 const { xAppId, xAppChl, xAppChlAppid, xAppChlAppType } = require('./env');
 
