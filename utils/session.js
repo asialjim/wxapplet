@@ -133,7 +133,7 @@ function refresh() {
     if (token && token.trim() !== '') {
       // 只有在获取到用户令牌后，才调用session接口
       wx.request({
-        url: rest('/user/service/user/session'),
+        url: rest('/user/session'),
         method: 'GET',
         header: header(null, false),
         success: (res) => {
