@@ -1,7 +1,7 @@
 // 引入依赖模块
 const { rest } = require('./url');
 const { parse, authenticated } = require('./response');
-const { userToken, refreshUserToken, header } = require('./api');
+const { userToken, refreshUserToken, header, get } = require('./api');
 
 // userSession 结构体定义
 
