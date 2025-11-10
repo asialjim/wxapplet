@@ -2,6 +2,7 @@
 // 引入依赖模块
 const { open } = require('./url');
 const { parse } = require('./response');
+const { post} = require('./api')
 const { xAppId, xAppChl, xAppChlAppid, xAppChlAppType } = require('./env');
 
 function refreshUserToken(){
@@ -24,38 +25,57 @@ function userToken() {
 
   // 6 还获取不到用户令牌，执行登录功能并从后台应用中换取用户的 令牌
   wx.login({
-    // 用户授权成功
-    success: (code) => {
-      try {
-        // 6.4 调用后台接口执行登录
-        wx.request({
-          url: open('/user/auth/login'),
-          data: { code: code.code },
-          header: header(null, true),
-          method: 'POST',
-          success: (res) => {
-            // 6.4.1 调用 parse 函数解析返回结果作为用户令牌
-            const token = parse(res);
-
-            // 6.4.2 将返回结果存储到本地存储中
-            if (token) {
-              wx.setStorageSync('x-user-token', token);
+    success: (code)=>{
+      post('/user/auth/login', { code: code.code }, {headers: header(null,true)})
+        .then((res) => {
+             if (res) {
+              wx.setStorageSync('x-user-token', res);
             } else {
               console.error('登录失败：未获取到有效的用户令牌');
             }
-          },
-          fail: (error) => {
-            console.error('登录请求失败:', error);
-          }
-        });
-      } catch (err) {
-        console.error('登录过程发生错误:', err);
-      }
-    },
+        }).catch((err) => {
+          console.error('登录请求失败:', err);
+        })
+    }, 
     fail: (err) => {
       throw new Error('登录失败：' + err.errMsg);
     }
-  });
+  })
+
+
+  // wx.login({
+  //   success: (code) => {
+  //   // 用户授权成功
+  //     try {
+  //       //6.4 调用后台接口执行登录
+  //       wx.request({
+  //         url: open('/user/auth/login'),
+  //         data: { code: code.code },
+  //         header: header(null, true),
+  //         method: 'POST',
+  //         success: (res) => {
+  //           // 6.4.1 调用 parse 函数解析返回结果作为用户令牌
+  //           const token = parse(res);
+
+  //           // 6.4.2 将返回结果存储到本地存储中
+  //           if (token) {
+  //             wx.setStorageSync('x-user-token', token);
+  //           } else {
+  //             console.error('登录失败：未获取到有效的用户令牌');
+  //           }
+  //         },
+  //         fail: (error) => {
+  //           console.error('登录请求失败:', error);
+  //         }
+  //       });
+  //     } catch (err) {
+  //       console.error('登录过程发生错误:', err);
+  //     }
+  //   },
+  //   fail: (err) => {
+  //     throw new Error('登录失败：' + err.errMsg);
+  //   }
+  // });
 
   // 7. 再次从本地存储中获取 x-user-token
   localToken = wx.getStorageSync('x-user-token');
