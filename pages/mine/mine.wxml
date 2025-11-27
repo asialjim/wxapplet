@@ -22,9 +22,6 @@
     <!-- 用户昵称 -->
     <view class="user-info">
         <text class="nickname" bindtap="onNicknameClick" >{{filters.mask(userInfo.nickName)}}</text>
-        <!--
-        <sensitive-data class="nickname" bindtap="onNicknameClick" value="{{userInfo.nickName}}"></sensitive-data>
-        -->
     </view>
     
     <!-- 昵称修改表单 -->
@@ -47,9 +44,6 @@
     <view class="phone-container">
       <button open-type="getPhoneNumber" bind:getphonenumber="onGetPhoneNumber" class="phone-button">
           <text class="phone-number" >{{filters.mask(userInfo.phoneNumber)}}</text>
-          <!--
-          <sensitive-data class="phone-number" value="{{userInfo.phoneNumber}}"></sensitive-data>
-          -->
       </button>
     </view>
     
@@ -73,11 +67,11 @@
         </view>
         <view class="info-item" wx:if="{{realNameInfo.name}}">
           <text class="info-label">姓名：</text>
-          <text class="info-value">{{realNameInfo.name}}</text>
+          <text class="info-value">{{sensitive(realNameInfo.name)}}</text>
         </view>
         <view class="info-item" wx:if="{{realNameInfo.number}}">
           <text class="info-label">号码：</text>
-          <text class="info-value">{{realNameInfo.number}}</text>
+          <text class="info-value">{{sensitive(realNameInfo.number)}}</text>
         </view>
         <view class="info-item" wx:if="{{realNameInfo.gender}}">
           <text class="info-label">性别：</text>
