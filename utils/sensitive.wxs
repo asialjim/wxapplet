@@ -13,19 +13,19 @@ function sensitive(str) {
   if (typeof str !== 'string') {
     return str;
   }
-  
+
   // 检查是否以 _mask| 开头
   if (str.indexOf('_mask|') !== 0) {
     return str;
   }
-  
+
   // 检查格式是否符合 _mask|algorithm|nonce|encrypt|mac|mask
   const parts = str.split('|');
   if (parts.length === 6) {
     // 返回 mask 部分
     return parts[5];
   }
-  
+
   // 不符合格式，返回原始字符串
   return str;
 }
