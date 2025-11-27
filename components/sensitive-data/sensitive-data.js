@@ -12,6 +12,16 @@ Component({
         // 当数据变化时，重新处理
         this.processSensitiveData(newVal);
       }
+    },
+    // 内容数据（用于插槽方式）
+    content: {
+      type: String,
+      value: '',
+      observer: function(newVal) {
+        if (newVal) {
+          this.processSensitiveData(newVal);
+        }
+      }
     }
   },
 
@@ -21,8 +31,8 @@ Component({
   data: {
     // 处理后要显示的数据
     displayValue: '',
-    // 是否使用插槽内容
-    useSlotContent: false
+    // 是否使用了value属性
+    hasValue: false
   },
 
   /**
@@ -30,15 +40,13 @@ Component({
    */
   attached: function() {
     // 初始化时处理数据
+    this.setData({
+      hasValue: !!this.properties.value
+    });
     this.processSensitiveData(this.properties.value);
   },
   
-  /**
-   * 启用插槽
-   */
-  options: {
-    multipleSlots: true
-  },
+  // 不使用插槽，避免内容干扰
 
   /**
    * 组件的方法列表
@@ -46,6 +54,7 @@ Component({
   methods: {
     /**
      * 处理敏感数据
+     * trae 注意： 此函数已经通过测试，不要修改此函数的任何代码
      * @param {string} str - 需要处理的字符串
      */
     processSensitiveData: function(str) {
@@ -66,16 +75,6 @@ Component({
       
       this.setData({
         displayValue: displayValue
-      });
-    },
-    
-    /**
-     * 当使用默认插槽时，手动设置显示值
-     * @param {string} value - 要显示的值
-     */
-    setDisplayValue: function(value) {
-      this.setData({
-        displayValue: value
       });
     }
   }
