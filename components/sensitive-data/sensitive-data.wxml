@@ -1,3 +1,10 @@
 <!-- sensitive-data.wxml -->
-<!-- 只显示处理后的脱敏数据，无论使用哪种方式 -->
-<text>{{displayValue}}</text>
+<!-- 支持两种使用方式 -->
+<!-- 方式1: 使用value属性时，显示处理后的脱敏数据 -->
+<block wx:if="{{hasValue}}">
+  <text>{{displayValue}}</text>
+</block>
+<!-- 方式2: 不使用value属性时，直接渲染插槽内容 -->
+<block wx:else>
+  <slot></slot>
+</block>

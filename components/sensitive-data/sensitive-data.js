@@ -11,16 +11,9 @@ Component({
       observer: function(newVal) {
         // 当数据变化时，重新处理
         this.processSensitiveData(newVal);
-      }
-    },
-    // 内容数据（用于插槽方式）
-    content: {
-      type: String,
-      value: '',
-      observer: function(newVal) {
-        if (newVal) {
-          this.processSensitiveData(newVal);
-        }
+        this.setData({
+          hasValue: !!newVal
+        });
       }
     }
   },
@@ -36,6 +29,13 @@ Component({
   },
 
   /**
+   * 启用插槽
+   */
+  options: {
+    multipleSlots: false
+  },
+
+  /**
    * 组件生命周期函数，在组件实例进入页面节点树时执行
    */
   attached: function() {
@@ -45,8 +45,6 @@ Component({
     });
     this.processSensitiveData(this.properties.value);
   },
-  
-  // 不使用插槽，避免内容干扰
 
   /**
    * 组件的方法列表
