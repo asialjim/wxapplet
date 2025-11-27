@@ -16,6 +16,88 @@ Component({
     // 继承text原生组件属性
     selectable: {
       type: Boolean,
+      value: false,
+      observer: function(newVal) {
+        this.setData({
+          selectable: newVal
+        });
+      }
+    },
+    userSelect: {
+      type: Boolean,
+      value: false,
+      observer: function(newVal) {
+        this.setData({
+          userSelect: newVal
+        });
+      }
+    },
+    space: {
+      type: String,
+      value: '',
+      observer: function(newVal) {
+        this.setData({
+          space: newVal
+        });
+      }
+    },
+    decode: {
+      type: Boolean,
+      value: false,
+      observer: function(newVal) {
+        this.setData({
+          decode: newVal
+        });
+      }
+    },
+    disableWhitespaceCollapse: {
+      type: Boolean,
+      value: false,
+      observer: function(newVal) {
+        this.setData({
+          disableWhitespaceCollapse: newVal
+        });
+      }
+    },
+    class: {
+      type: String,
+      value: '',
+      observer: function(newVal) {
+        this.setData({
+          class: newVal
+        });
+      }
+    },
+    style: {
+      type: String,
+      value: '',
+      observer: function(newVal) {
+        this.setData({
+          type: newVal
+        });
+      }
+    },
+    // 事件属性
+    bindtap: {
+       type: String,
+      value: '',
+      observer: function(newVal) {
+        this.setData({
+          bindtap: newVal
+        });
+      }
+    }
+  },
+
+  /**
+   * 组件的初始数据
+   */
+  data: {
+    // 处理后要显示的数据
+    displayValue: ''
+    // 继承text原生组件属性
+    selectable: {
+      type: Boolean,
       value: false
     },
     userSelect: {
@@ -44,16 +126,9 @@ Component({
     },
     // 事件属性
     bindtap: {
-      type: null
+       type: String,
+      value: ''
     }
-  },
-
-  /**
-   * 组件的初始数据
-   */
-  data: {
-    // 处理后要显示的数据
-    displayValue: ''
   },
 
   /**
@@ -62,6 +137,7 @@ Component({
   attached: function() {
     // 初始化时处理数据
     this.processSensitiveData(this.properties.value);
+    
   },
 
   /**
