@@ -20,7 +20,10 @@
     
     <!-- 用户昵称 -->
     <view class="user-info">
-      <text class="nickname" bindtap="onNicknameClick">{{userInfo.nickName}}</text>
+      <text class="nickname" bindtap="onNicknameClick">
+        <sensitive-data value="{{userInfo.nickName}}"></sensitive-data>
+      </text>
+
     </view>
     
     <!-- 昵称修改表单 -->
@@ -42,7 +45,9 @@
     <!-- 用户手机号 - 可点击进行授权 -->
     <view class="phone-container">
       <button open-type="getPhoneNumber" bind:getphonenumber="onGetPhoneNumber" class="phone-button">
-        <text class="phone-number">{{userInfo.phoneNumber}}</text>
+        <text class="phone-number">
+          <sensitive-data value="{{userInfo.phoneNumber}}"></sensitive-data>
+        </text>
       </button>
     </view>
     

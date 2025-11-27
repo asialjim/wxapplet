@@ -1,3 +1,6 @@
 <!-- sensitive-data.wxml -->
 <!-- 只支持value属性方式，显示处理后的脱敏数据 -->
+<!--
 <text>{{displayValue}}</text>
+-->
+<span>{{displayValue}}</span>
