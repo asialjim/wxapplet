@@ -1,0 +1,21 @@
+// mask.wxs
+var mask = function(value) {
+  let displayValue = value;
+      
+      // 检查输入是否为字符串
+      if (typeof str === 'string') {
+        // 检查是否以 _mask| 开头
+        if (str.indexOf('_mask|') === 0) {
+          // 检查格式是否符合 _mask|algorithm|nonce|encrypt|mac|mask
+          const parts = str.split('|');
+          if (parts.length === 6) {
+            // 返回 mask 部分
+            displayValue = parts[5];
+          }
+        }
+      }
+     
+     return displayValue;
+};
+
+module.exports = mask;
