@@ -16,10 +16,7 @@
       <sensitive-data value="{{testSensitiveData.valid}}" class="test-value"></sensitive-data>
     </view>
     
-    <view class="test-item">
-      <view class="test-label">组件处理（内容方式）：</view>
-      <sensitive-data class="test-value">{{testSensitiveData.valid}}</sensitive-data>
-    </view>
+    
     
     <view class="test-item">
       <view class="test-label">无效数据：</view>
@@ -31,10 +28,7 @@
       <sensitive-data value="{{testSensitiveData.invalid}}" class="test-value"></sensitive-data>
     </view>
     
-    <view class="test-item">
-      <view class="test-label">组件处理（内容方式）：</view>
-      <sensitive-data class="test-value">{{testSensitiveData.invalid}}</sensitive-data>
-    </view>
+    
     
     <view class="test-item">
       <view class="test-label">非字符串数据：</view>
@@ -46,9 +40,6 @@
       <sensitive-data value="{{testSensitiveData.notString}}" class="test-value"></sensitive-data>
     </view>
     
-    <view class="test-item">
-      <view class="test-label">组件处理（内容方式）：</view>
-      <sensitive-data class="test-value">{{testSensitiveData.notString}}</sensitive-data>
-    </view>
+    
   </view>
 </view>

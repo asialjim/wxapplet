@@ -11,9 +11,6 @@ Component({
       observer: function(newVal) {
         // 当数据变化时，重新处理
         this.processSensitiveData(newVal);
-        this.setData({
-          hasValue: !!newVal
-        });
       }
     }
   },
@@ -23,16 +20,7 @@ Component({
    */
   data: {
     // 处理后要显示的数据
-    displayValue: '',
-    // 是否使用了value属性
-    hasValue: false
-  },
-
-  /**
-   * 启用插槽
-   */
-  options: {
-    multipleSlots: false
+    displayValue: ''
   },
 
   /**
@@ -40,9 +28,6 @@ Component({
    */
   attached: function() {
     // 初始化时处理数据
-    this.setData({
-      hasValue: !!this.properties.value
-    });
     this.processSensitiveData(this.properties.value);
   },
 
