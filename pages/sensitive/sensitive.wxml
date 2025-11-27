@@ -41,5 +41,29 @@
     </view>
     
     
+    <!-- 测试原生text组件属性传递 -->
+    <view class="test-section">
+      <view class="section-title">原生text组件属性传递测试</view>
+      
+      <view class="test-item">
+        <view class="test-label">测试selectable属性（可选文本）：</view>
+        <sensitive-data value="这是一段可选文本" selectable="true" class="test-value"></sensitive-data>
+      </view>
+      
+      <view class="test-item">
+        <view class="test-label">测试style属性（红色文本）：</view>
+        <sensitive-data value="这是红色文本" style="color: red; font-weight: bold;" class="test-value"></sensitive-data>
+      </view>
+      
+      <view class="test-item">
+        <view class="test-label">测试decode属性（解码特殊字符）：</view>
+        <sensitive-data value="&lt;需要解码的文本&gt;" decode="true" class="test-value"></sensitive-data>
+      </view>
+      
+      <view class="test-item">
+        <view class="test-label">测试space属性（空格处理）：</view>
+        <sensitive-data value="这是  包含 多个 空格 的文本" space="nbsp" class="test-value"></sensitive-data>
+      </view>
+    </view>
   </view>
 </view>

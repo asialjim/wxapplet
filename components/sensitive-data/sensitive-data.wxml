@@ -1,6 +1,13 @@
 <!-- sensitive-data.wxml -->
-<!-- 只支持value属性方式，显示处理后的脱敏数据 -->
-<!--
-<text>{{displayValue}}</text>
--->
-<span>{{displayValue}}</span>
+<!-- 支持value属性方式，并将所有属性传递给内部的text组件 -->
+<text 
+    class="{{class}}" 
+    style="{{style}}" 
+    selectable="{{selectable}}" 
+    user-select="{{userSelect}}" 
+    space="{{space}}" 
+    decode="{{decode}}" 
+    disable-whitespace-collapse="{{disableWhitespaceCollapse}}"
+>
+    {{displayValue}}
+</text>

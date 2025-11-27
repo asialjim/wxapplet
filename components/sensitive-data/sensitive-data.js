@@ -12,6 +12,35 @@ Component({
         // 当数据变化时，重新处理
         this.processSensitiveData(newVal);
       }
+    },
+    // 继承text原生组件属性
+    selectable: {
+      type: Boolean,
+      value: false
+    },
+    userSelect: {
+      type: Boolean,
+      value: false
+    },
+    space: {
+      type: String,
+      value: ''
+    },
+    decode: {
+      type: Boolean,
+      value: false
+    },
+    disableWhitespaceCollapse: {
+      type: Boolean,
+      value: false
+    },
+    class: {
+      type: String,
+      value: ''
+    },
+    style: {
+      type: String,
+      value: ''
     }
   },
 
