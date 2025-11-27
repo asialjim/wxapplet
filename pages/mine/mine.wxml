@@ -1,6 +1,6 @@
 <!-- mine.wxml -->
 <!-- 引入敏感数据脱敏 WXS 模块 -->
-<wxs src="../../utils/mask" module="mask" />
+<wxs src="../../utils/sensitive.wxs" module="mask" />
 
 <view class="container">
   <!-- 全局加载遮罩 -->
