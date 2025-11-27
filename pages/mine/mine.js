@@ -256,7 +256,7 @@ Page({
       });
       
       // 调用后台接口更新昵称
-      put(rest('/user/nickname'), { data: { nickname: nickname}})
+      put(rest('/user/nickname'),  { nickname: nickname})
         .then(res => {
           // 隐藏加载提示
           wx.hideLoading();
