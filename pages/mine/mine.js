@@ -16,6 +16,15 @@ Page({
       nickName: '加载中...',
       phoneNumber: '加载中...'
     },
+    // 测试敏感数据
+    testSensitiveData: {
+      // 符合格式的数据
+      valid: '_mask|algorithm|nonce|encrypt|mac|138****1234',
+      // 不符合格式的数据
+      invalid: '13812341234',
+      // 非字符串数据
+      notString: 123
+    },
     showNicknameForm: false,
     tempNickname: '',
     showIdCardInfo: false,
@@ -45,12 +54,8 @@ Page({
   // 加载用户信息的统一方法
   loadUserInfo() {
     console.log('开始加载用户信息');
-    // 从后台获取用户头像
-    this.getAvatarFromBackend();
-    // 从后台获取用户昵称
-    this.getNicknameFromBackend();
-    // 尝试获取用户手机号
-    this.getUserPhoneNumber();
+    // 从后台获取统一用户信息（头像、昵称、手机号）
+    this.getUserInfoFromBackend();
     // 初始化可用证件类型
     this.initAvailableIdCardTypes();
     
@@ -172,70 +177,46 @@ Page({
      // 阻止事件冒泡到遮罩层
    },
   
-  // 从后台获取用户昵称
-  getNicknameFromBackend() {
+  // 从后台获取统一用户信息（头像、昵称、手机号）
+  getUserInfoFromBackend() {
     const that = this;
-    get(rest('/user/nickname'))
-    .then(res => {
-        console.log('从后台获取昵称成功:', res);
+    get(rest('/user/brief'))
+      .then(res => {
+        console.log('从后台获取统一用户信息成功:', res);
+        // 处理返回的用户信息
+        const userInfo = {
+          avatarUrl: res.avatar || '../../images/default_avatar.jpg',
+          nickName: res.nickname || '微信用户',
+          phoneNumber: res.phone ? res.phone : '请授权手机号'
+        };
+        
+        // 适配逻辑：检查头像是否为base64字符串
+        if (userInfo.avatarUrl && typeof userInfo.avatarUrl === 'string') {
+          if (!userInfo.avatarUrl.startsWith('http://') && !userInfo.avatarUrl.startsWith('https://')) {
+            console.log('处理base64格式头像');
+            userInfo.avatarUrl = `data:image/jpeg;base64,${userInfo.avatarUrl}`;
+          }
+        }
+        
+        that.setData({
+          userInfo: userInfo
+        });
+      })
+      .catch(err => {
+        console.log('从后台获取统一用户信息失败:', err);
+        // 请求失败，使用默认值
         that.setData({
           userInfo: {
-            ...that.data.userInfo,
-            nickName: res || '微信用户'
+            avatarUrl: '../../images/default_avatar.jpg',
+            nickName: '微信用户',
+            phoneNumber: '请授权手机号'
           }
         });
-    }).catch(err => {
-      console.log('从后台获取昵称失败:', err);
-      // 请求失败，使用默认昵称
-      that.setData({
-        userInfo: {
-          ...that.data.userInfo,
-          nickName: '微信用户'
-        }
       });
-    })
-
   },
 
   onShow() {
     console.log('个人中心页面显示');
-  },
-
-  // 从后台获取用户头像
-  getAvatarFromBackend() {
-    const that = this;
-    get(rest('/user/avatar'))
-      .then(res => {
-        console.log('从后台获取头像成功:', res);
-        let avatarUrl = res;
-        
-        // 适配逻辑：检查是否为base64字符串
-        if (res && typeof res === 'string') {
-          // 如果不是以http://或https://开头，则认为是base64字符串
-          if (!res.startsWith('http://') && !res.startsWith('https://')) {
-            console.log('处理base64格式头像');
-            // 为base64字符串添加必要的前缀
-            avatarUrl = `data:image/jpeg;base64,${res}`;
-          }
-        }
-        
-        that.setData({
-          userInfo: {
-            ...that.data.userInfo,
-            avatarUrl: avatarUrl
-          }
-        });
-      })
-      .catch(err => {
-        console.log('从后台获取头像失败:', err);
-        // 请求失败，使用默认头像
-        that.setData({
-          userInfo: {
-            ...that.data.userInfo,
-            avatarUrl: '../../images/default_avatar.jpg'
-          }
-        });
-      });
   },
 
   // 处理微信头像选择事件
@@ -360,8 +341,8 @@ Page({
               duration: 2000
             });
             
-            // 恢复原来的头像
-            that.getAvatarFromBackend();
+            // 恢复原来的头像（调用统一接口）
+            that.getUserInfoFromBackend();
           }
         })
         .catch(err => {
@@ -374,8 +355,8 @@ Page({
             duration: 2000
           });
           
-          // 恢复原来的头像
-          that.getAvatarFromBackend();
+          // 恢复原来的头像（调用统一接口）
+          that.getUserInfoFromBackend();
         });
     } else {
       // 使用文件上传方式（由于api.js中未封装uploadFile，暂时保留原生调用）
@@ -422,39 +403,11 @@ Page({
             icon: 'none',
             duration: 2000
           });
-          // 恢复原来的头像
-          that.getAvatarFromBackend();
+          // 恢复原来的头像（调用统一接口）
+          that.getUserInfoFromBackend();
         }
       });
     }
-  },
-
-  // 获取用户手机号
-  getUserPhoneNumber() {
-    const that = this;
-    // 调用后台接口获取用户授权手机号
-    get(rest(  '/user/phone'))
-      .then(res => {
-        console.log('从后台获取手机号成功:', res);
-        // 如果返回结果不为空且有长度则直接显示，否则显示请授权手机号
-        const phoneNumber = res && res.length > 0 ? res : '请授权手机号';
-        that.setData({
-          userInfo: {
-            ...that.data.userInfo,
-            phoneNumber: phoneNumber
-          }
-        });
-      })
-      .catch(err => {
-        console.log('从后台获取手机号失败:', err);
-        // 请求失败，显示请授权手机号
-        that.setData({
-          userInfo: {
-            ...that.data.userInfo,
-            phoneNumber: '请授权手机号'
-          }
-        });
-      });
   },
 
   // 用于页面中button组件的getPhoneNumber事件
@@ -487,8 +440,8 @@ Page({
           wx.hideLoading();
           
           console.log('手机号注册成功:', res);
-          // 注册成功后重新获取手机号
-          that.getUserPhoneNumber();
+          // 注册成功后重新获取统一用户信息
+          that.getUserInfoFromBackend();
           
           // 显示成功提示
           wx.showToast({

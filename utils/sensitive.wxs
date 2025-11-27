@@ -1,0 +1,33 @@
+// sensitive.wxs
+// 敏感数据脱敏处理函数
+// 识别格式：_mask|algorithm|nonce|encrypt|mac|mask
+// 符合格式时只返回 mask 部分，否则返回原始字符串
+
+/**
+ * 敏感数据脱敏处理
+ * @param {string} str - 需要处理的字符串
+ * @returns {string} - 处理后的字符串
+ */
+function sensitive(str) {
+  // 检查输入是否为字符串
+  if (typeof str !== 'string') {
+    return str;
+  }
+  
+  // 检查是否以 _mask| 开头
+  if (str.indexOf('_mask|') !== 0) {
+    return str;
+  }
+  
+  // 检查格式是否符合 _mask|algorithm|nonce|encrypt|mac|mask
+  const parts = str.split('|');
+  if (parts.length === 6) {
+    // 返回 mask 部分
+    return parts[5];
+  }
+  
+  // 不符合格式，返回原始字符串
+  return str;
+}
+
+export { sensitive };
