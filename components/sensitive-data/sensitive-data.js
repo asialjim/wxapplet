@@ -41,6 +41,10 @@ Component({
     style: {
       type: String,
       value: ''
+    },
+    // 事件属性
+    bindtap: {
+      type: null
     }
   },
 

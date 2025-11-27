@@ -19,5 +19,14 @@ Page({
 
   onShow() {
     console.log('敏感数据测试页面显示');
+  },
+  
+  // 点击事件处理函数
+  onTextTap() {
+    wx.showToast({
+      title: '点击事件已触发',
+      icon: 'none'
+    });
+    console.log('敏感数据组件点击事件已触发');
   }
 });

@@ -64,6 +64,11 @@
         <view class="test-label">测试space属性（空格处理）：</view>
         <sensitive-data value="这是  包含 多个 空格 的文本" space="nbsp" class="test-value"></sensitive-data>
       </view>
+      
+      <view class="test-item">
+        <view class="test-label">测试bindtap事件：</view>
+        <sensitive-data value="点击此文本触发点击事件" bindtap="onTextTap" class="test-value clickable"></sensitive-data>
+      </view>
     </view>
   </view>
 </view>
