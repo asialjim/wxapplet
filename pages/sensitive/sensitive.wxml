@@ -1,0 +1,54 @@
+<!-- sensitive.wxml -->
+<view class="container">
+  <view class="page-title">敏感数据测试</view>
+  
+  <!-- 自定义组件方式 -->
+  <view class="test-section">
+    <view class="section-title">自定义组件方式测试</view>
+    
+    <view class="test-item">
+      <view class="test-label">原始有效数据：</view>
+      <view class="test-value">{{testSensitiveData.valid}}</view>
+    </view>
+    
+    <view class="test-item">
+      <view class="test-label">组件处理（属性方式）：</view>
+      <sensitive-data value="{{testSensitiveData.valid}}" class="test-value"></sensitive-data>
+    </view>
+    
+    <view class="test-item">
+      <view class="test-label">组件处理（内容方式）：</view>
+      <sensitive-data class="test-value">{{testSensitiveData.valid}}</sensitive-data>
+    </view>
+    
+    <view class="test-item">
+      <view class="test-label">无效数据：</view>
+      <view class="test-value">{{testSensitiveData.invalid}}</view>
+    </view>
+    
+    <view class="test-item">
+      <view class="test-label">组件处理（属性方式）：</view>
+      <sensitive-data value="{{testSensitiveData.invalid}}" class="test-value"></sensitive-data>
+    </view>
+    
+    <view class="test-item">
+      <view class="test-label">组件处理（内容方式）：</view>
+      <sensitive-data class="test-value">{{testSensitiveData.invalid}}</sensitive-data>
+    </view>
+    
+    <view class="test-item">
+      <view class="test-label">非字符串数据：</view>
+      <view class="test-value">{{testSensitiveData.notString}}</view>
+    </view>
+    
+    <view class="test-item">
+      <view class="test-label">组件处理（属性方式）：</view>
+      <sensitive-data value="{{testSensitiveData.notString}}" class="test-value"></sensitive-data>
+    </view>
+    
+    <view class="test-item">
+      <view class="test-label">组件处理（内容方式）：</view>
+      <sensitive-data class="test-value">{{testSensitiveData.notString}}</sensitive-data>
+    </view>
+  </view>
+</view>

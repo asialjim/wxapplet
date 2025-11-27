@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "敏感数据测试",
+  "usingComponents": {
+    "sensitive-data": "/components/sensitive-data/sensitive-data"
+  }
+}

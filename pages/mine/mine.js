@@ -16,15 +16,6 @@ Page({
       nickName: '加载中...',
       phoneNumber: '加载中...'
     },
-    // 测试敏感数据
-    testSensitiveData: {
-      // 符合格式的数据
-      valid: '_mask|algorithm|nonce|encrypt|mac|138****1234',
-      // 不符合格式的数据
-      invalid: '13812341234',
-      // 非字符串数据
-      notString: 123
-    },
     showNicknameForm: false,
     tempNickname: '',
     showIdCardInfo: false,

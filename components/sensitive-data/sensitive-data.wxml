@@ -1,2 +1,3 @@
 <!-- sensitive-data.wxml -->
 <text>{{displayValue}}</text>
+<slot></slot>

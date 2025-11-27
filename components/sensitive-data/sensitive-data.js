@@ -20,7 +20,9 @@ Component({
    */
   data: {
     // 处理后要显示的数据
-    displayValue: ''
+    displayValue: '',
+    // 是否使用插槽内容
+    useSlotContent: false
   },
 
   /**
@@ -29,6 +31,13 @@ Component({
   attached: function() {
     // 初始化时处理数据
     this.processSensitiveData(this.properties.value);
+  },
+  
+  /**
+   * 启用插槽
+   */
+  options: {
+    multipleSlots: true
   },
 
   /**
@@ -57,6 +66,16 @@ Component({
       
       this.setData({
         displayValue: displayValue
+      });
+    },
+    
+    /**
+     * 当使用默认插槽时，手动设置显示值
+     * @param {string} value - 要显示的值
+     */
+    setDisplayValue: function(value) {
+      this.setData({
+        displayValue: value
       });
     }
   }
