@@ -94,7 +94,7 @@ Component({
    */
   data: {
     // 处理后要显示的数据
-    displayValue: ''
+    displayValue: '',
     // 继承text原生组件属性
     selectable: {
       type: Boolean,
@@ -137,7 +137,7 @@ Component({
   attached: function() {
     // 初始化时处理数据
     this.processSensitiveData(this.properties.value);
-    
+
   },
 
   /**
