@@ -1,8 +1,7 @@
 // mine.js
 const { rest } = require('../../utils/url');
-const { get, put, post } = require('../../utils/api');
+const { get, put, post, header } = require('../../utils/api');
 const { xAppId, xAppChl, wxAppId } = require('../../utils/env');
-const {header} = require('../../utils/header');
 const IdCardType = require('../../utils/id-card-type');
 const { refreshSession } = require('../../utils/session');
 
